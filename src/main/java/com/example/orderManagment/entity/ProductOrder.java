@@ -13,9 +13,7 @@ import lombok.NoArgsConstructor;
 public class ProductOrder {
     @Id
     @GeneratedValue
-    private Long productId;
-
-    private Long orderId;
+    private Long productOrderId;
 
     private int quantity;
 
@@ -23,12 +21,12 @@ public class ProductOrder {
 
     private double vat;
 
-        @ManyToOne
-     @JoinColumn(name = "product_id")
+    @ManyToOne
+    @JoinColumn(name = "productId")
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "orderId")
     private Order order;
 
     // Constructors, getters, and setters

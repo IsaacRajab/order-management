@@ -1,5 +1,6 @@
 package com.example.orderManagment.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,16 +19,17 @@ public class Order {
     @GeneratedValue
     private Long id;
 
-    private Long  customerId;
+
 
     private Date orderedAt;
 
 
     @OneToMany(mappedBy = "order")
+    @JsonIgnore
     private List<ProductOrder> productOrders;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customerId")
     private Customer customer;
 
 }

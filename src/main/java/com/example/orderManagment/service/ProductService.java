@@ -3,6 +3,7 @@ package com.example.orderManagment.service;
 import com.example.orderManagment.entity.Product;
 import com.example.orderManagment.repository.ProductRepository;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,8 @@ import java.util.List;
 
 @Service
 public class ProductService {
-    private final ProductRepository productRepository;
+   @Autowired
+   private final ProductRepository productRepository;
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;

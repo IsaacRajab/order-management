@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,6 +27,7 @@ public class AuthenticationService {
     private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
     private final TokenRepository tokenRepository;
+    @Autowired
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
@@ -67,7 +69,7 @@ public class AuthenticationService {
     }
     private void saveUserToken(Customer customer, String jwtToken) {
         var token = Token.builder()
-                .user(customer)
+                .customer(customer)
                 .token(jwtToken)
                 .tokenType(TokenType.BEARER)
                 .expired(false)

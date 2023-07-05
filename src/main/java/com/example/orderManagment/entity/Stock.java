@@ -17,14 +17,12 @@ public class Stock {
     @GeneratedValue
     private Long id;
 
-    private Long productId;
-
     private int  quantity;
 
     private Date updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "productId")
     private Product product;
 
 

@@ -7,13 +7,15 @@ import com.example.orderManagment.service.OrderService;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/api/v1/customer")
+@PreAuthorize("hasRole('CUSTOMER')")
 public class CustomerController {
     private final CustomerService customerService;
 
@@ -22,6 +24,7 @@ public class CustomerController {
     }
 
     @GetMapping
+
     public ResponseEntity<List<Customer>> getAllCustomers() {
         List<Customer> customers = customerService.getAllCustomers();
         return ResponseEntity.ok(customers);
@@ -38,6 +41,7 @@ public class CustomerController {
         Customer createdCustomer = customerService.createCustomer(customer);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customer) throws ChangeSetPersister.NotFoundException {

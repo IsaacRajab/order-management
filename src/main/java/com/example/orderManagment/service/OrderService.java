@@ -2,6 +2,7 @@ package com.example.orderManagment.service;
 
 import com.example.orderManagment.entity.Order;
 import com.example.orderManagment.repository.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,8 @@ import java.util.List;
 
 @Service
 public class OrderService {
-    private final OrderRepository orderRepository;
+   @Autowired
+   private final OrderRepository orderRepository;
 
     public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
@@ -29,7 +31,6 @@ public class OrderService {
 
     public Order updateOrder(Long id, Order orderDetails) throws ChangeSetPersister.NotFoundException {
         Order order = getOrderById(id);
-        order.setCustomerId(orderDetails.getCustomerId());
         order.setOrderedAt(orderDetails.getOrderedAt());
         return orderRepository.save(order);
     }

@@ -1,6 +1,7 @@
 package com.example.orderManagment.entity;
 
 import com.example.orderManagment.token.Token;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +24,7 @@ import java.util.List;
 public class Customer implements UserDetails {
     @Id
     @GeneratedValue
+
     private Long id;
     private String firstName;
 
@@ -37,9 +39,11 @@ public class Customer implements UserDetails {
     private Role role;
 
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     private List<Order> orders;
 
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     private List<Token> tokens;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

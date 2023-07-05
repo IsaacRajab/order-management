@@ -3,6 +3,7 @@ package com.example.orderManagment.service;
 import com.example.orderManagment.entity.Stock;
 import com.example.orderManagment.repository.StockRepository;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +11,13 @@ import java.util.List;
 
 @Service
 public class StockService {
-    private final StockRepository stockRepository;
+   private final StockRepository stockRepository;
 
     public StockService(StockRepository stockRepository) {
         this.stockRepository = stockRepository;
     }
+
+
 
     public List<Stock> getAllStocks() {
         return stockRepository.findAll();
@@ -31,7 +34,6 @@ public class StockService {
 
     public Stock updateStock(Long id, Stock stockDetails) {
         Stock stock = getStockById(id);
-        stock.setProductId(stockDetails.getProductId());
         stock.setQuantity(stockDetails.getQuantity());
         stock.setUpdatedAt(stockDetails.getUpdatedAt());
         return stockRepository.save(stock);

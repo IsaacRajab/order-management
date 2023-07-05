@@ -2,6 +2,7 @@ package com.example.orderManagment.service;
 
 import com.example.orderManagment.entity.Customer;
 import com.example.orderManagment.repository.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 @Service
 public class CustomerService {
+    @Autowired
     private final CustomerRepository customerRepository;
 
     public CustomerService(CustomerRepository customerRepository) {

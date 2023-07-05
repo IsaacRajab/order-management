@@ -1,5 +1,6 @@
 package com.example.orderManagment.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +16,7 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
+    @Column(name = "productid")
     private Long id;
 
     private String slug;
@@ -31,9 +32,11 @@ public class Product {
     private boolean stockable;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<ProductOrder> productOrders;
 
     @OneToMany(mappedBy = "product")
+    @JsonIgnore
     private List<Stock> stocks;
     // Constructors, getters, and setters
 }
